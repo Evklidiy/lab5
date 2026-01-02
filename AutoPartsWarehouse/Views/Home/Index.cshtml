@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Главная";
+}
+
+<div class="bg-light p-5 rounded-3 mb-4 text-center border-bottom shadow-sm">
+    <h1 class="display-4 fw-bold">Склад Автозапчастей</h1>
+    <p class="lead text-muted">Эффективное управление запасами, поставками и продажами.</p>
+    
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <hr class="my-4">
+        <p>Для начала работы необходимо войти в систему.</p>
+        <a class="btn btn-primary btn-lg px-4 gap-3" asp-controller="Account" asp-action="Login" role="button">Войти в систему</a>
+        <a class="btn btn-outline-secondary btn-lg px-4" asp-controller="Account" asp-action="Register" role="button">Регистрация</a>
+    }
+    else
+    {
+        <a class="btn btn-success btn-lg px-4" asp-controller="AutoParts" asp-action="Index" role="button">Перейти к каталогу</a>
+    }
+</div>
+
+<div class="row align-items-md-stretch">
+    <div class="col-md-4 mb-3">
+        <div class="h-100 p-4 text-white bg-dark rounded-3 shadow-sm">
+            <h2>📦 Запчасти</h2>
+            <p>Полный каталог с поиском по артикулу, названию и производителю. Отслеживание закупочных и розничных цен.</p>
+            <a class="btn btn-outline-light" asp-controller="AutoParts" asp-action="Index">Открыть каталог</a>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="h-100 p-4 bg-light border rounded-3 shadow-sm">
+            <h2>🚚 Поставки</h2>
+            <p>Управление поставщиками и приходом товаров. История поставок и статусы выполнения заказов.</p>
+            <a class="btn btn-outline-secondary" asp-controller="Supplies" asp-action="Index">Управление поставками</a>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="h-100 p-4 bg-white border rounded-3 shadow-sm">
+            <h2>👥 Администрирование</h2>
+            <p>Управление пользователями системы, назначение ролей и прав доступа для сотрудников склада.</p>
+            @if (User.IsInRole("Admin"))
+            {
+                <a class="btn btn-outline-primary" asp-controller="Admin" asp-action="Index">Панель админа</a>
+            }
+            else
+            {
+                <button class="btn btn-outline-secondary" disabled>Доступ закрыт</button>
+            }
+        </div>
+    </div>
+</div>п

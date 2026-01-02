@@ -1,0 +1,63 @@
+﻿@model AutoPartsWarehouse.Models.AutoPart
+
+@{
+    ViewData["Title"] = "Редактирование";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-warning text-dark">
+                <h4 class="mb-0">Редактирование запчасти</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="mb-3">
+                        <label asp-for="Article" class="form-label"></label>
+                        <input asp-for="Article" class="form-control" />
+                        <span asp-validation-for="Article" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Manufacturer" class="form-label"></label>
+                        <input asp-for="Manufacturer" class="form-control" />
+                        <span asp-validation-for="Manufacturer" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CompatibleModels" class="form-label"></label>
+                        <input asp-for="CompatibleModels" class="form-control" />
+                        <span asp-validation-for="CompatibleModels" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="PurchasePrice" class="form-label"></label>
+                            <input asp-for="PurchasePrice" class="form-control" type="number" step="0.01" />
+                            <span asp-validation-for="PurchasePrice" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="SalePrice" class="form-label"></label>
+                            <input asp-for="SalePrice" class="form-control" type="number" step="0.01" />
+                            <span asp-validation-for="SalePrice" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-warning">Сохранить изменения</button>
+                        <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

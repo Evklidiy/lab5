@@ -1,0 +1,41 @@
+﻿@model IEnumerable<AutoPartsWarehouse.ViewModels.UserViewModel>
+
+@{
+    ViewData["Title"] = "Управление пользователями";
+}
+
+<h2>Список пользователей</h2>
+<p>
+    <a asp-action="Create" class="btn btn-success mb-2">Добавить пользователя</a>
+</p>
+
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>Email</th>
+            <th>Роли</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.Email</td>
+            <td>@string.Join(", ", user.Roles)</td>
+            <td>
+                <!-- Кнопка смены прав -->
+                <a class="btn btn-sm btn-info text-white" asp-action="EditRoles" asp-route-userId="@user.Id">Права</a>
+                
+                <!-- Форма удаления с подтверждением -->
+                <form asp-action="Delete" asp-route-id="@user.Id" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-sm btn-danger" 
+                            onclick="return confirm('Вы действительно хотите удалить пользователя @user.Email?');">
+                        Удалить
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

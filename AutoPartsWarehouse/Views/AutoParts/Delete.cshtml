@@ -1,0 +1,40 @@
+﻿@model AutoPartsWarehouse.Models.AutoPart
+
+@{
+    ViewData["Title"] = "Удаление";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-danger">
+            <div class="card-header bg-danger text-white">
+                <h4 class="mb-0">Удаление запчасти</h4>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-center mb-4">Вы уверены, что хотите удалить это?</h5>
+                
+                <dl class="row">
+                    <dt class="col-sm-4">Артикул</dt>
+                    <dd class="col-sm-8">@Model.Article</dd>
+
+                    <dt class="col-sm-4">Название</dt>
+                    <dd class="col-sm-8">@Model.Name</dd>
+
+                    <dt class="col-sm-4">Производитель</dt>
+                    <dd class="col-sm-8">@Model.Manufacturer</dd>
+
+                    <dt class="col-sm-4">Цена</dt>
+                    <dd class="col-sm-8">@Model.SalePrice</dd>
+                </dl>
+
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-danger">Подтвердить удаление</button>
+                        <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

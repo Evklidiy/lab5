@@ -1,0 +1,77 @@
+﻿@model AutoPartsWarehouse.ViewModels.AutoPartsFilterViewModel
+
+@{
+    ViewData["Title"] = "Каталог запчастей";
+}
+
+<h1>Каталог запчастей</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Добавить новую</a>
+</p>
+
+<!-- Форма фильтрации -->
+<form method="get" class="mb-3">
+    <div class="row">
+        <div class="col-md-4">
+            <label>Название:</label>
+            <input name="searchName" value="@Model.SearchName" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label>Производитель:</label>
+            <input name="searchManufacturer" value="@Model.SearchManufacturer" class="form-control" />
+        </div>
+        <div class="col-md-4 align-self-end">
+            <button type="submit" class="btn btn-secondary">Фильтр</button>
+        </div>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Артикул</th>
+            <th>Название</th>
+            <th>Производитель</th>
+            <th>Цена продажи</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.AutoParts)
+        {
+            <tr>
+                <td>@item.Article</td>
+                <td>@item.Name</td>
+                <td>@item.Manufacturer</td>
+                <td>@item.SalePrice</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Ред.</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Уд.</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Пагинация -->
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       asp-route-searchName="@Model.SearchName"
+       asp-route-searchManufacturer="@Model.SearchManufacturer"
+       class="btn btn-outline-dark">
+        &lt; Назад
+    </a>
+}
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       asp-route-searchName="@Model.SearchName"
+       asp-route-searchManufacturer="@Model.SearchManufacturer"
+       class="btn btn-outline-dark">
+        Вперед &gt;
+    </a>
+}

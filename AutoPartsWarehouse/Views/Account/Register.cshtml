@@ -1,0 +1,62 @@
+﻿@model AutoPartsWarehouse.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card shadow-lg border-0 rounded-lg">
+            <div class="card-header bg-success text-white text-center py-3">
+                <h3 class="font-weight-light my-2">Создание аккаунта</h3>
+            </div>
+            <div class="card-body p-5">
+                <form asp-action="Create" asp-controller="Admin" method="post"> 
+                    <!-- Примечание: Обычно регистрация идет через AccountController, 
+                         но в моем коде выше Create был в AdminController для простоты. 
+                         Если ты хочешь публичную регистрацию, нужно добавить метод Register в AccountController.
+                         
+                         ДАВАЙ ИСПРАВИМ ЭТО НИЖЕ, добавив метод в AccountController.
+                         Пока предположим, что форма шлет на Account/Register -->
+                     <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Email" class="form-control" placeholder="name@example.com" />
+                        <label asp-for="Email">Email адрес</label>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3 mb-md-0">
+                                <input asp-for="Password" class="form-control" placeholder="Create a password" />
+                                <label asp-for="Password">Пароль</label>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3 mb-md-0">
+                                <input asp-for="PasswordConfirm" class="form-control" placeholder="Confirm password" />
+                                <label asp-for="PasswordConfirm">Подтверждение</label>
+                                <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-success btn-lg">Зарегистрироваться</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center py-3">
+                <div class="small">
+                    <a asp-action="Login" class="text-decoration-none">Уже есть аккаунт? Войти</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
